@@ -19,7 +19,7 @@ namespace Reminder.Storage.InMemory.Tests
 				Status = ReminderItemStatus.Awaiting
 			};
 
-			var storage = new ReminderStorage();
+			var storage = new InMemoryReminderStorage();
 			storage.Add(reminder);
 
 			Assert.AreEqual(1, storage.Reminders.Count);
@@ -28,7 +28,7 @@ namespace Reminder.Storage.InMemory.Tests
 		[TestMethod]
 		public void Get_By_Id_Method_Returns_Null_For_Empty_Storage()
 		{
-			var storage = new ReminderStorage();
+			var storage = new InMemoryReminderStorage();
 
 			var actual = storage.Get(Guid.Empty);
 
@@ -64,7 +64,7 @@ namespace Reminder.Storage.InMemory.Tests
 
 			var id = reminders[3].Id;
 
-			var storage = new ReminderStorage();
+			var storage = new InMemoryReminderStorage();
 			foreach (var reminder in reminders)
 				storage.Add(reminder);
 
@@ -77,7 +77,7 @@ namespace Reminder.Storage.InMemory.Tests
 		[TestMethod]
 		public void Remove_By_Id_Method_Returns_False_For_Empty_Storage()
 		{
-			var storage = new ReminderStorage();
+			var storage = new InMemoryReminderStorage();
 
 			var actual = storage.Remove(Guid.Empty);
 
@@ -109,7 +109,7 @@ namespace Reminder.Storage.InMemory.Tests
 
 			var id = reminders[3].Id;
 
-			var storage = new ReminderStorage();
+			var storage = new InMemoryReminderStorage();
 			foreach (var reminder in reminders)
 				storage.Add(reminder);
 
@@ -146,7 +146,7 @@ namespace Reminder.Storage.InMemory.Tests
 				}
 			};
 
-			var storage = new ReminderStorage();
+			var storage = new InMemoryReminderStorage();
 			foreach (var reminder in reminders)
 				storage.Add(reminder);
 
@@ -183,7 +183,7 @@ namespace Reminder.Storage.InMemory.Tests
 				}
 			};
 
-			var storage = new ReminderStorage();
+			var storage = new InMemoryReminderStorage();
 			foreach (var reminder in reminders)
 				storage.Add(reminder);
 
@@ -220,7 +220,7 @@ namespace Reminder.Storage.InMemory.Tests
 				}
 			};
 
-			var storage = new ReminderStorage();
+			var storage = new InMemoryReminderStorage();
 			foreach (var reminder in reminders)
 				storage.Add(reminder);
 
@@ -258,7 +258,7 @@ namespace Reminder.Storage.InMemory.Tests
 				}
 			};
 
-			var storage = new ReminderStorage();
+			var storage = new InMemoryReminderStorage();
 			foreach (var reminder in reminders)
 				storage.Add(reminder);
 
@@ -308,7 +308,7 @@ namespace Reminder.Storage.InMemory.Tests
 				}
 			};
 
-			var storage = new ReminderStorage();
+			var storage = new InMemoryReminderStorage();
 			foreach (var reminder in reminders)
 				storage.Add(reminder);
 

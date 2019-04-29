@@ -8,14 +8,14 @@ namespace Reminder.Storage.InMemory
 	/// <summary>
 	/// In-memory implementation of the IReminderStorage interface.
 	/// </summary>
-	public class ReminderStorage : IReminderStorage
+	public class InMemoryReminderStorage : IReminderStorage
 	{
 		internal readonly Dictionary<Guid, ReminderItem> Reminders;
 
 		/// <summary>
 		/// Initializes a new instance.
 		/// </summary>
-		public ReminderStorage()
+		public InMemoryReminderStorage()
 		{
 			Reminders = new Dictionary<Guid, ReminderItem>();
 		}
