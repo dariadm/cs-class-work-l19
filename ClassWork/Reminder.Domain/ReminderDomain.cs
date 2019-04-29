@@ -25,6 +25,9 @@ namespace Reminder.Domain
 		public ReminderDomain(IReminderStorage storage)
 		{
 			_storage = storage;
+
+			_awaitingRemindersCheckingPeriod = TimeSpan.FromSeconds(1);
+			_readyRemindersSendingPeriod = TimeSpan.FromSeconds(1);
 		}
 
 		public ReminderDomain(
@@ -63,7 +66,15 @@ namespace Reminder.Domain
 				});
 		}
 
-		public void CheckAwaitingReminders(object dummy)
+		public void Dispose()
+		{
+			_awaitingRemindersCheckTimer?.Dispose();
+			_readyRemindersSendTimer?.Dispose();
+		}
+
+		#region Timer Callback Methods
+
+		private void CheckAwaitingReminders(object dummy)
 		{
 			var ids = _storage
 				.Get(ReminderItemStatus.Awaiting)
@@ -75,11 +86,10 @@ namespace Reminder.Domain
 				ReminderItemStatus.Ready);
 		}
 
-		public void SendReadyReminders(object dummy)
+		private void SendReadyReminders(object dummy)
 		{
 			var sendReminderModels = _storage
 				.Get(ReminderItemStatus.Ready)
-				.Where(r => r.IsTimeToSend)
 				.Select(r =>
 					new SendReminderModel
 					{
@@ -119,10 +129,6 @@ namespace Reminder.Domain
 			}
 		}
 
-		public void Dispose()
-		{
-			_awaitingRemindersCheckTimer?.Dispose();
-			_readyRemindersSendTimer?.Dispose();
-		}
+		#endregion
 	}
 }
